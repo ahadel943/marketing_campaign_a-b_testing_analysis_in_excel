@@ -161,3 +161,34 @@ Below are the box plots for the control campaign metrics after fixing outliers a
   <img src="./charts/control_data/7.distribution_of_count_of_add_to_cart.jpg" width="400"/>
   <img src="./charts/control_data/8.distribution_of_count_of_purchase.jpg" width="400"/>
 </p>
+
+### **5.3 Z-Score Summary**
+To further validate the absence of outliers, Z-scores were calculated for each feature.
+
+The results confirmed that all values fall within the range of **–3 to +3**, indicating no remaining outliers in either dataset.
+
+#### **Test Campaign Z-score summary table**:
+
+| Feature / Value | Minimum Z-score | Maximum Z-score | Outliers Detected |
+| --------------- | --------------- | --------------- | ----------------- |
+| **Spend (USD)** | -1.71               | 1.57            | **NO**        |
+| **# of Impressions** | -1.62          | 1.84            | **NO**        |
+| **Reach** | -1.49                     | 1.96            | **NO**        |
+| **# of Website Clicks** | -1.75       | 1.31            | **NO**        |
+| **# of Searches** | -1.45             | 1.44            | **NO**        |
+| **# of View Content** | -1.67         | 1.58            | **NO**        |
+| **# of Add to Cart** | -1.74          | 1.47            | **NO**        |
+| **# of Purchase** | -1.34             | 1.75            | **NO**        |
+
+#### **Control Campaign Z-score summary table**:
+
+| Feature / Value | Minimum Z-score | Maximum Z-score | Outliers Detected |
+| --------------- | --------------- | --------------- | ----------------- |
+| **Spend (USD)** | -1.45               | 2.16            | **NO**        |
+| **# of Impressions** | -1.80          | 1.67            | **NO**        |
+| **Reach** | -2.14                     | 1.82            | **NO**        |
+| **# of Website Clicks** | -1.76       | 1.63            | **NO**        |
+| **# of Searches** | -1.65             | 2.06            | **NO**        |
+| **# of View Content** | -1.43         | 2.98            | **NO**        |
+| **# of Add to Cart** | -2.14          | 1.53            | **NO**        |
+| **# of Purchase** | -1.65             | 1.52            | **NO**        |
