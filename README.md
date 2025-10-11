@@ -1,6 +1,6 @@
 # Marketing Campaign A/B Testing Analysis in Excel
 
-## 🧾 **Introduction**
+## 1. 🧾 **Introduction**
 This project focuses on analyzing the performance of two distinct marketing campaigns, a Control Campaign and a Test Campaign, both conducted during the period from **August 1** to **August 30**.
 
 The goal of this analysis is to evaluate the effectiveness of each campaign based on multiple performance metrics such as **spending, impressions, website clicks, searches, content views, add-to-cart actions, and purchases**.
@@ -9,7 +9,7 @@ A/B Testing was used as the primary framework for comparison. This technique all
 
 By combining **descriptive analysis** with **statistical testing**, this project aims to identify which campaign achieved better results and provide insights that can guide future marketing decisions.
 
-## 🎯 **Objective**
+## 2. 🎯 **Objective**
 The main objective of this project is to **compare the performance** of the two marketing campaigns, Control and Test, to determine which one delivered better results during the campaign period.
 
 Specifically, the analysis seeks to:
@@ -22,7 +22,7 @@ Specifically, the analysis seeks to:
 
 Through this analysis, the project demonstrates how A/B testing can be used to guide **evidence-based decision-making** in digital marketing.
 
-## 📊 **Dataset Description**
+## 3. 📊 **Dataset Description**
 * **Data Source**: The dataset was synthetically generated to simulate real-world digital marketing performance data for two e-commerce campaigns.
 
 * **Time Period**: From **August 1st** to **August 30th**, covering **30 days** of campaign performance.
@@ -56,7 +56,7 @@ Through this analysis, the project demonstrates how A/B testing can be used to g
 
     * Data cleaning and preparation were performed using Power Query to ensure data quality before analysis.
 
-## 🧹**Data Cleaning**
+## 4. 🧹**Data Cleaning**
 Before conducting any statistical analysis, the dataset was carefully cleaned to ensure accuracy and consistency.
 
 * **Outlier Treatment**:
@@ -78,7 +78,7 @@ This approach helped maintain the overall statistical balance without introducin
 
     * **Categorical fields** such as Campaign Name were standardized.
 
-## **🔍 Exploratory Data Analysis (EDA)**
+## 5. 🔍 **Exploratory Data Analysis (EDA)**
 The goal of this step was to gain a clear understanding of both marketing campaigns (Control and Test groups) before conducting any hypothesis testing.
 
 ### **5.1 Descriptive Statistics**
@@ -114,7 +114,7 @@ They provide a quick overview of how the performance metrics differ between the 
 ### **5.2 Box Plots**
 Box plots were created for each numerical column to visualize the data distribution and confirm that outliers were successfully handled.
 
-All plots were saved in **  ** resolution for clear presentation and future reference.
+All plots were saved in **1080p** resolution for clear presentation and future reference.
 
 #### **Test Campaign Box Plots**:
 The following plots show the data distribution for the test campaign metrics after cleaning:
@@ -192,3 +192,90 @@ The results confirmed that all values fall within the range of **–3 to +3**, i
 | **# of View Content** | -1.43         | 2.98            | **NO**        |
 | **# of Add to Cart** | -2.14          | 1.53            | **NO**        |
 | **# of Purchase** | -1.65             | 1.52            | **NO**        |
+
+## 6. 🧮 **A/B Testing**
+### 🔹 **Objective**
+The goal of this A/B test is to determine whether the performance metrics of the **Test Campaign** differ significantly from those of the **Control Campaign**, and to identify which campaign performed better across key KPIs.
+
+### 🔹 **Methodology**
+* **Test type**: Independent two-sample t-test (assuming equal or unequal variances based on F-test results).
+* **Significance level (α)**: 0.05
+* **Null hypothesis (H₀)**: There is no statistically significant difference between the means of the Control and Test groups.
+* **Alternative hypothesis (H₁)**: There is a statistically significant difference between the means of the Control and Test groups.
+
+The **F-test** was first used to check variance equality for each feature, and based on that, the appropriate **T-test** (equal or unequal variance) was applied.
+
+### 🔹 **Variance Check (F-Test)**
+| Feature | Test Variance | Control Variance | Variance Ratio (F-Test) | Type |
+| ------- | ------------- | ---------------- | ----------------------- | ---- |
+| **Spend [USD]** | 121,583 | 134,935  | 	1.11 |	**equal var** |
+| **# of Impressions** | 1,031,782,887 | 454,188,364 |	2.27 | **unequal var** |
+| **Reach** | 829,196,701 | 460,215,231 | 1.80 | **equal var** |
+| **# of Website Clicks** | 2,919,202 | 2,981,851 | 1.02 | **equal var** |
+| **# of Searches** | 151,121 | 472,022 | 3.12 | **unequal var** |
+| **# of View Content** | 357,191	| 583,729	| 1.63 | **equal var** |
+| **# of Add to Cart** | 120,815 | 160,297 | 1.33 | **equal var** |
+| **# of Purchase** | 44,541 | 33,055 | 1.35 | **equal var** |
+
+### 🔹 **T-Test Results**
+| Feature             | Avg. Test Group | Avg. Control Group |  p-value | Significant (p < 0.05)? | Better Campaign |
+| ------------------ | -------------- | ----------------- | ------- | --------------------- | ------------- |
+| **Spend [USD]**         |           2,563 |              2,288 |   0.0043 |          **YES**          |       **TEST**      |
+| **# of Impressions**    |          74,585 |            109,560 | 0.000008 |          **YES**          |     **CONTROL**     |
+| **Reach**               |          53,492 |             88,845 | 0.000001 |          **YES**          |     **CONTROL**     |
+| **# of Website Clicks** |           6,032 |              5,321 |    0.114 |         **NO**          |       **TEST**      |
+| **# of Searches**       |           2,419 |              2,135 |   0.0549 |         **NO**          |       **TEST**      |
+| **# of View Content**   |           1,858 |              1,944 |   0.6299 |         **NO**          |     **CONTROL**     |
+| **# of Add to Cart**    |             882 |              1,300 | 0.000061 |          **YES**          |     **CONTROL**     |
+| **# of Purchase**       |             521 |                523 |   0.9756 |         **NO**          |     **CONTROL**     |
+
+### 🔹 **Interpretation**
+* Metrics with **p-value < 0.05** show a **statistically significant** difference between the two campaigns.
+* The **Control Campaign** significantly outperformed the Test in **Impressions, Reach, and Add to Cart**, suggesting stronger upper-funnel and mid-funnel performance.
+* The **Test Campaign** achieved a significantly higher **Spend**, but this higher spending did not translate into better downstream results (e.g., conversions or purchases).
+* For other metrics like **Website Clicks, Searches**, and **Purchases**, the differences were not **statistically significant**, meaning performance was similar between both campaigns.
+
+### 🔹 **Conclusion**
+The A/B testing results indicate that the **Control Campaign** delivered stronger engagement and conversion outcomes despite lower spending efficiency in the **Test Campaign**.
+
+Future testing could focus on optimizing the **Test Campaign’s targeting or ad creative** to improve downstream metrics and achieve higher ROI.
+
+## 7. 📊 **Results & Insights**
+### 🔹 **Overall Performance Summary**
+* The **Control Campaign** achieved higher **Impressions**, **Reach**, and **Add to Cart** rates, indicating better audience engagement and stronger top- and mid-funnel performance.
+* The **Test Campaign** recorded higher **spending**, yet this increase did not lead to significantly better conversions or purchases.
+* Conversion-related metrics such as **Website Clicks**, **Searches**, and **Purchases** showed no **statistically significant** difference between the two campaigns.
+
+### 🔹 **Statistical Significance**
+* Significant differences were confirmed for **Impressions**, **Reach**, and **Add to Cart** (p < 0.05).
+* Differences in **Spend**, although statistically significant, did not reflect improved conversion efficiency.
+* Other metrics had **p-values above 0.05**, meaning both campaigns performed similarly on those fronts.
+
+### 🔹 **Key Insights**
+1. **Control Campaign dominance**: Despite lower spending, it reached more users and generated more cart additionsو suggesting more effective targeting or creative content.
+2. **Test Campaign inefficiency**: The higher budget did not translate into proportionally higher engagement or sales.
+3. **Optimization opportunity**: Future A/B tests should adjust **audience segmentation**, **creative messaging**, and **budget allocation** to improve cost efficiency.
+4. **Focus on conversion funnel**: Since both campaigns had similar purchase outcomes, further analysis should focus on post-click user behavior and checkout experience.
+
+## 8. 🧭 **Recommendations**
+1. **Reallocate budget based on performance**:<br>
+  Since the Control Campaign achieved better reach and engagement with lower spending, future campaigns should adopt a similar cost structure and ad delivery strategy.
+2. **Review creative content and targeting**:<br>
+  The Test Campaign’s higher cost with limited improvement suggests potential issues in targeting or ad design. Testing alternative creatives or refining audience segmentation could improve ROI.
+3. **Prioritize conversion optimization**:<br>
+  As both campaigns showed similar purchase results, efforts should focus on improving the conversion journey, e.g., landing page design, checkout flow, or personalized offers.
+4. **Conduct follow-up experiments**:<br>
+  Run focused A/B tests on individual factors (e.g., ad copy, visuals, bidding strategy) to isolate what drives better engagement and sales.
+5. **Integrate behavioral metrics**:<br>
+  Consider adding data such as session duration, bounce rate, or engagement per user in future tests to gain deeper insights into audience response.
+
+## 🧠 Skills Demonstrated
+* Data Cleaning (handling missing values & outliers).
+* Exploratory Data Analysis (descriptive statistics & visualizations).
+* Statistical Testing (two-sample T-test for A/B comparison).
+* Data Validation and Interpretation.
+* Excel Functions and Power Query for transformation and analysis.
+
+## 🧰 Tools Used
+* **Microsoft Excel**: primary tool for data analysis and statistical testing.
+* **Power Query**: used for data cleaning and transformation.
